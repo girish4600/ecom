@@ -1,8 +1,10 @@
 package org.gsk.product.service;
 
 import jakarta.validation.Valid;
-import org.gsk.product.model.ProductRequest;
-import org.gsk.product.model.ProductResponse;
+import org.gsk.product.model.product.ProductRequest;
+import org.gsk.product.model.product.ProductResponse;
+import org.gsk.product.model.purchase.ProductPurchaseRequest;
+import org.gsk.product.model.purchase.ProductPurchaseResponse;
 
 import java.util.List;
 
@@ -11,5 +13,7 @@ public interface ProductService {
 
     ProductResponse findById(Integer id);
 
-    List<ProductResponse> fimdAll();
+    List<ProductResponse> findAll();
+
+    List<ProductPurchaseResponse> purchaseProduct(@Valid List<ProductPurchaseRequest> purchaseRequests);
 }

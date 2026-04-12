@@ -1,4 +1,4 @@
-package org.gsk.product.model;
+package org.gsk.product.model.product;
 
 import lombok.Builder;
 
