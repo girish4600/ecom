@@ -29,7 +29,7 @@ public class CustomerController {
     @GetMapping("/{custId}")
     public ResponseEntity<CustomerResponse> findById(@PathVariable(name = "custId") Integer custId){
         log.info("inside controller findById");
-        return new ResponseEntity<>(customerServiceImpl.findById(custId), HttpStatus.FOUND);
+        return ResponseEntity.ok(customerServiceImpl.findById(custId));
     }
 
     @GetMapping
