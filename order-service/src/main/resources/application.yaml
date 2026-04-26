@@ -12,18 +12,24 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#  cloud:
-#    openfeign:
-#      client:
-#        config:
-#          customer-service:
-##            url: ${CUSTOMER_SERVICE_URL}
+  cloud:
+    openfeign:
+      client:
+        config:
+          customer-service:
+            url: ${CUSTOMER_SERVICE_URL}
 #            url: http://localhost:9091
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 application:
   config:
-    product-url: http://localhost:9092
-
+#    product-url: http://localhost:9090
+    product-url: http://product-service:9090
 server:
   port: 9093
 
