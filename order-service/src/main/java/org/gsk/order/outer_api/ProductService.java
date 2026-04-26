@@ -26,7 +26,7 @@ public class ProductService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${application.config.product-url:http://localhost:9092}")
+    @Value("${application.config.product-url:http://localhost:9090}")
     private String productUrl;
 
 
@@ -35,6 +35,7 @@ public class ProductService {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set(CONTENT_TYPE, APPLICATION_JSON_VALUE);
         HttpEntity<List<ProductPurchaseRequest>>   requestEntity = new HttpEntity<>(purchaseRequest, httpHeaders);
+        System.out.println("productUrl :: "+ productUrl);
         ParameterizedTypeReference<List<ProductPurchaseResponse>> responseType = new ParameterizedTypeReference<List<ProductPurchaseResponse>>() {};
         ResponseEntity<List<ProductPurchaseResponse>> responseEntity =  restTemplate.exchange(productUrl+"/v1/product/purchase",
                         HttpMethod.POST,

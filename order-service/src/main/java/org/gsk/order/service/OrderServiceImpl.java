@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 
         //send order confirmation -->  notification microservice
 
-        return null;
+        return order.getId().toString();
     }
 
     @Override
