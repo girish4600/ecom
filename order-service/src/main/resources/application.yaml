@@ -2,11 +2,11 @@ spring:
   application:
     name: order-service
 ## Comment datasource part when you are running docker-compose
-  datasource:
-    url: jdbc:mysql://localhost:3306/order_db?useSSL=false&serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/order_db?useSSL=false&serverTimezone=UTC
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
@@ -37,5 +37,5 @@ eureka:
   client:
     service-url:
       ## Comment datasource part when you are running docker-compose
-            defaultZone: http://localhost:8761/eureka
-#      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+#     defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
