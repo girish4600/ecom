@@ -1,9 +1,12 @@
-package org.gsk.order.orderline.service;
+package com.gsk.payment.kafka;
 
+import com.gsk.payment.kafka.model.PaymentNotificationRequest;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
@@ -13,10 +16,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig {
+public class KafkaPaymentTopicConfig {
 
     @Bean
-    public ProducerFactory<String, Object> producerFactory() {
+    public NewTopic paymentTopic(){
+        return TopicBuilder.name("payment-topic").build();
+    }
+
+    @Bean
+    public ProducerFactory<String, PaymentNotificationRequest> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -26,7 +34,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Object> kafkaTemplate() {
+    public KafkaTemplate<String, PaymentNotificationRequest> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
