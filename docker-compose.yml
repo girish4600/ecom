@@ -79,5 +79,17 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
 
+  notification-service:
+    build: notification-service
+    container_name: notification-service
+    ports:
+      - "9095:9095"
+    depends_on:
+      - service-registry
+      - order-service
+      - payment-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+
 volumes:
   mysql-data:

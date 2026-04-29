@@ -81,14 +81,14 @@ public class OrderServiceImpl implements OrderService {
         paymentService.createPayment(paymentRequest);
         log.info("======================== payment creation completed ========================");
         //send order confirmation -->  notification microservice
-        /*notificationProducer.sendNotification(
+        notificationProducer.sendNotification(
                 new OrderNotificationRequest( order.getId(),
                         orderRequest.reference(),
                         orderRequest.paymentMethod(),
                         orderRequest.amount(),
                         orderRequest.customerId())
 
-        );*/
+        );
         return order.getId().toString();
     }
 
