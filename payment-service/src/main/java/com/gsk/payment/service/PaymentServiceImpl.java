@@ -27,8 +27,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public @Nullable Integer createPayment(PaymentRequest paymentRequest) {
+        log.info("======================== Generating payment ========================");
         var payment = paymentRepository.save(mapper.dtoToEntity(paymentRequest));
-        notificationProducer.sendNotification(
+        System.out.println("Customer Details :: "+paymentRequest.customer());
+        /*notificationProducer.sendNotification(
                new PaymentNotificationRequest(
                        paymentRequest.orderReference(),
                        paymentRequest.amount(),
@@ -37,7 +39,7 @@ public class PaymentServiceImpl implements PaymentService {
                         paymentRequest.customer().lastName(),
                         paymentRequest.customer().email()
                 )
-        );
+        );*/
         return payment.getId();
     }
 
