@@ -62,7 +62,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
       CUSTOMER_SERVICE_URL: http://customer-service:9091
-      PRODUCT_SERVICE_URL: http://product-service:9092
+      PRODUCT_SERVICE_URL: http://product-service:9090
+      PAYMENT_SERVICE_URL: http://payment-service:9094
 
   payment-service:
     build: payment-service

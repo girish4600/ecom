@@ -19,6 +19,9 @@ spring:
           customer-service:
             url: ${CUSTOMER_SERVICE_URL}
 #            url: http://localhost:9091
+          payment-service:
+            url: ${PAYMENT_SERVICE_URL}
+#              url: http://localhost:9094
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -31,7 +34,9 @@ spring:
 application:
   config:
 #    product-url: http://localhost:9090
-    product-url: http://product-service:9090
+    product-url: ${PRODUCT_SERVICE_URL}
+#    payment-url: http://localhost:9094
+    payment-url: ${PAYMENT_SERVICE_URL}
 server:
   port: 9093
 
