@@ -5,8 +5,8 @@ public record PaymentRequest(
         Double amount,
         PaymentMethod paymentMethod,
         Integer orderId,
-        String orderReference/*,
-        Customer customer*/
+        String orderReference,
+        Customer customer
 
 ) {
 }
