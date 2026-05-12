@@ -1,9 +1,9 @@
-package com.gsk.payment.kafka;
+package com.gsk.order.kafka;
 
-import com.gsk.payment.kafka.model.PaymentNotificationRequest;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
+import com.gsk.order.kafka.model.OrderNotificationRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,28 +17,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaPaymentTopicConfig {
+public class KafkaProducerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     @Bean
-    public NewTopic paymentTopic(){
-        return TopicBuilder.name("payment-topic").build();
+    public NewTopic orderTopic() {
+        return TopicBuilder.name("order-topic").build();
     }
 
     @Bean
-    public ProducerFactory<String, PaymentNotificationRequest> producerFactory() {
+    public ProducerFactory<String, OrderNotificationRequest> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        config.put(JsonSerializer.TYPE_MAPPINGS, "paymentConfirmation:com.gsk.payment.kafka.model.PaymentNotificationRequest");
+        //need to add alias(orderConfirmation) here
+        config.put(JsonSerializer.TYPE_MAPPINGS, "orderConfirmation:com.gsk.order.kafka.model.OrderNotificationRequest");
+
         return new DefaultKafkaProducerFactory<>(config);
     }
 
     @Bean
-    public KafkaTemplate<String, PaymentNotificationRequest> kafkaTemplate() {
+    public KafkaTemplate<String, OrderNotificationRequest> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

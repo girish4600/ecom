@@ -24,12 +24,14 @@ spring:
 #              url: http://localhost:9094
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring.json.type.mapping: orderConfirmation:com.gsk.order.kafka.model.OrderNotificationRequest
+# below will not work as we have custom kafkaTemplate in KafkaProducerConfig
+#      properties:
+#        spring.json.type.mapping: orderConfirmation:org.gsk.order.kafka.model.OrderNotificationRequest
+
 
 application:
   config:
