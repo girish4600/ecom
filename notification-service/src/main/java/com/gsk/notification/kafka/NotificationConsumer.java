@@ -12,31 +12,18 @@ import org.springframework.kafka.annotation.KafkaListener;
 @Slf4j
 public class NotificationConsumer {
 
-   /* @Autowired
-    private NotificationRepository notificationRepository;*/
-
-    @KafkaListener(topics = "payment-topic")
+    @KafkaListener(
+            topics = "payment-topic",
+            groupId = "paymentGroup")
     public void confirmPaymentSuccessConfirmation(PaymentConfirmation paymentConfirmation) {
         log.info("======Consume payment kafka in notification :: {} ", paymentConfirmation);
-        /*notificationRepository.save(
-                Notification.builder()
-                        .notificationType(NotificationType.PAYMENT_CONFIRMATION)
-                        .notificationDate(LocalDateTime.now())
-                        .paymentConfirmation(paymentConfirmation)
-                        .build()
-        );*/
     }
 
-    @KafkaListener(topics = "order-topic")
+    @KafkaListener(
+            topics = "order-topic",
+            groupId = "orderGroup"
+    )
     public void confirmOrderSuccessConfirmation(OrderConfirmation orderConfirmation) {
         log.info("======Consume order kafka in notification :: {} ", orderConfirmation);
-        /*notificationRepository.save(
-                Notification.builder()
-                        .notificationType(NotificationType.PAYMENT_CONFIRMATION)
-                        .notificationDate(LocalDateTime.now())
-                        .orderConfirmation(orderConfirmation)
-                        .build()
-        );*/
     }
-
 }
