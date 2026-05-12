@@ -13,12 +13,12 @@ spring:
       ddl-auto: update
     show-sql: true
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring.json.type.mapping: paymentConfirmation:com.gsk.payment.kafka.model.PaymentNotificationRequest
+#      properties:
+#        spring.json.type.mapping: paymentConfirmation:com.gsk.payment.kafka.model.PaymentNotificationRequest
 server:
   port: 9094
 

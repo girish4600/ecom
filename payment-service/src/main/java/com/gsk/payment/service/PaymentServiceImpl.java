@@ -30,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
         log.info("======================== Generating payment ========================");
         var payment = paymentRepository.save(mapper.dtoToEntity(paymentRequest));
         System.out.println("Customer Details :: "+paymentRequest.customer());
-        /*notificationProducer.sendNotification(
+        notificationProducer.sendNotification(
                new PaymentNotificationRequest(
                        paymentRequest.orderReference(),
                        paymentRequest.amount(),
@@ -39,7 +39,7 @@ public class PaymentServiceImpl implements PaymentService {
                         paymentRequest.customer().lastName(),
                         paymentRequest.customer().email()
                 )
-        );*/
+        );
         return payment.getId();
     }
 
