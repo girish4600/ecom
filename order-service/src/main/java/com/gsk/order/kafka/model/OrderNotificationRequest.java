@@ -1,7 +1,11 @@
 package com.gsk.order.kafka.model;
 
+import com.gsk.order.model.customer.CustomerResponse;
+import com.gsk.order.model.product.ProductPurchaseResponse;
 import lombok.Builder;
 import com.gsk.order.model.PaymentMethod;
+
+import java.util.List;
 
 @Builder
 public record OrderNotificationRequest(
@@ -9,6 +13,7 @@ public record OrderNotificationRequest(
         String reference,
         PaymentMethod paymentMethod,
         Long amount,
-        Integer customerId
+        CustomerResponse customer,
+        List<ProductPurchaseResponse> products
 ) {
 }

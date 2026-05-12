@@ -5,8 +5,8 @@ import com.gsk.notification.kafka.order.OrderConfirmation;
 import com.gsk.notification.kafka.payment.PaymentConfirmation;
 import com.gsk.notification.model.NotificationType;
 import lombok.*;
-//import org.springframework.data.annotation.Id;
-//import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @AllArgsConstructor@NoArgsConstructor
-//@Document
+@Document(collection = "notifications")
 public class Notification {
 
-//    @Id
+    @Id
     private String id;
     private NotificationType notificationType;
     private LocalDateTime notificationDate;

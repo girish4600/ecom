@@ -13,6 +13,7 @@ public record Customer(
         String lastName,
         @NotNull(message = "email is required")
         @Email(message = "The customer is not correctly formatted")
-        String email
+        String email,
+        String address
 ) {
 }

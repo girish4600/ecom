@@ -5,10 +5,12 @@ import lombok.Builder;
 
 @Builder
 public record CustomerRequest(
-        @NotNull(message = "Name should not be empty")
-        String name,
-        String email,
+        @NotNull(message = "First Name should not be empty")
+        String firstName,
+        @NotNull(message = "Last Name should not be empty")
+        String lastName,
         @NotNull(message = "address should not be empty")
-        String address
+        String address,
+        String email
 ) {
 }
