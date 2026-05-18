@@ -1,10 +1,8 @@
 spring:
   application:
     name: notification-service
-  data:
-    mongodb:
-      uri: ${SPRING_DATA_MONGODB_URI}
-      auto-index-creation: true
+  mongodb:
+    uri: ${SPRING_DATA_MONGODB_URI}
 
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}

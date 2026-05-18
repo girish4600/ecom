@@ -29,11 +29,12 @@ public class NotificationConsumer {
     public void confirmPaymentSuccessConfirmation(PaymentConfirmation paymentConfirmation) {
         log.info("======Consume payment kafka in notification :: {} ", paymentConfirmation);
         log.info("saving payment Confirmation inside mongo");
-        notificationRepository.save(Notification.builder()
+        var notification = notificationRepository.save(Notification.builder()
                         .notificationType(NotificationType.PAYMENT_CONFIRMATION)
                         .notificationDate(LocalDateTime.now())
                         .paymentConfirmation(paymentConfirmation)
                 .build());
+        System.out.println("Notification :: " + notification);
         log.info("saving payment Confirmation inside mongo");
         //todo send email
     }
