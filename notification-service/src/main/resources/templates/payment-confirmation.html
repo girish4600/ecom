@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+            color: #333333;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .success {
+            color: #27ae60;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .details {
+            margin-top: 25px;
+        }
+
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .details td {
+            padding: 12px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #888888;
+            font-size: 13px;
+        }
+
+        .amount {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h2>Payment Confirmation</h2>
+        <p class="success">Your payment was successful</p>
+    </div>
+
+    <p>
+        Hello <strong th:text="${customerName}"></strong>,
+    </p>
+
+    <p>
+        Thank you for your payment. Your transaction has been successfully processed.
+    </p>
+
+    <div class="details">
+        <table>
+            <tr>
+                <td><strong>Order Reference</strong></td>
+                <td th:text="${orderReference}"></td>
+            </tr>
+
+            <tr>
+                <td><strong>Amount Paid</strong></td>
+                <td class="amount">
+                    ₹ <span th:text="${amount}"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>Payment Status</strong></td>
+                <td>SUCCESS</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for shopping with us.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
