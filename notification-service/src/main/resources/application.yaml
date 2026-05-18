@@ -1,9 +1,9 @@
 spring:
   application:
     name: notification-service
-#  data:
-#    mongodb:
-#      uri: mongodb://localhost:27017/your-db
+  mongodb:
+    uri: ${SPRING_DATA_MONGODB_URI}
+
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
     consumer:

@@ -84,7 +84,9 @@ public class OrderServiceImpl implements OrderService {
                         orderRequest.reference(),
                         orderRequest.paymentMethod(),
                         orderRequest.amount(),
-                        orderRequest.customerId())
+                        customer,
+                        purchaseList
+                        )
 
         );
         return order.getId().toString();

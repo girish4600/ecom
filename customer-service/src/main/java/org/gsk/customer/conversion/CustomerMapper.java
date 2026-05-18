@@ -10,7 +10,8 @@ public class CustomerMapper {
 
     public Customer dtoToEntity(CustomerRequest request) {
         return Customer.builder()
-                .name(request.name())
+                .firstName(request.firstName())
+                .lastName(request.lastName())
                 .email(request.email())
                 .address(request.address())
                 .build();
@@ -19,7 +20,8 @@ public class CustomerMapper {
     public CustomerResponse entityToDto(Customer customer) {
         return CustomerResponse.builder()
                 .customerId(customer.getCustomerId())
-                .name(customer.getName())
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
                 .email(customer.getEmail())
                 .address(customer.getAddress())
                 .build();
