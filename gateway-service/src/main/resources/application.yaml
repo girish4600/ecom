@@ -16,27 +16,27 @@ spring:
 
           routes:
             - id: customer-service
-              uri: lb:http://CUSTOMER-SERVICE
+              uri: lb://customer-service
               predicates:
                 - Path=/v1/customer/**
 
             - id: product-service
-              uri: lb:http://PRODUCT-SERVICE
+              uri: lb://product-service
               predicates:
                 - Path=/v1/product/**
 
             - id: order-service
-              uri: lb:http://ORDER-SERVICE
+              uri: lb://order-service
               predicates:
                 - Path=/v1/order/**
 
             - id: payment-service
-              uri: lb:http://PAYMENT-SERVICE
+              uri: lb://payment-service
               predicates:
                 - Path=/v1/payment/**
 
             - id: notification-service
-              uri: lb:http://notification-service
+              uri: lb://notification-service
               predicates:
                 - Path=/v1/notification/**
 
@@ -44,3 +44,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://service-registry:8761/eureka/
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
