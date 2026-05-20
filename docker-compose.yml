@@ -37,7 +37,7 @@ services:
     build: customer-service
     container_name: customer-service
     ports:
-      - "9091:9091"
+      - "9091:8080"
     depends_on:
       - service-registry
       - mysql
@@ -51,7 +51,7 @@ services:
     build: product-service
     container_name: product-service
     ports:
-      - "9090:9090"
+      - "9090:8080"
     depends_on:
       - service-registry
       - mysql
@@ -65,7 +65,7 @@ services:
     build: order-service
     container_name: order-service
     ports:
-      - "9093:9093"
+      - "9093:8080"
     depends_on:
       - service-registry
       - mysql
@@ -88,7 +88,7 @@ services:
       - mysql
       - kafka
     ports:
-      - "9094:9094"
+      - "9094:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ecom_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
@@ -100,7 +100,7 @@ services:
     build: notification-service
     container_name: notification-service
     ports:
-      - "9095:9095"
+      - "9095:8080"
     depends_on:
       - service-registry
       - mongodb
@@ -116,6 +116,8 @@ services:
       SPRING_MAIL_PORT: 1025
       SPRING_MAIL_USERNAME:
       SPRING_MAIL_PASSWORD:
+
+
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -140,6 +142,22 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+
+  gateway-service:
+    build: gateway-service
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-registry
+      - customer-service
+      - product-service
+      - order-service
+      - payment-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+
 
   mailhog:
     image: mailhog/mailhog
