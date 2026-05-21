@@ -1,0 +1,46 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu:latest
+
+    strategy:
+      matrix:
+        service:
+          - service-registry
+          - gateway-service
+          - customer-service
+          - product-service
+          - order-service
+          - payment-service
+          - notification-service
+
+    steps:
+      - name: Set up dynamic Docker tag
+        run: echo "DOCKER_TAG=$(date +'%d%m%Y-%H%M%S')" >> $GITHUB_ENV
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build service-registry Image
+        run: |
+          docker build \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:${{ github.sha }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:{{ env.DOCKER_TAG }} \          
+            ./${{ matrix.service }}
+
+      - name: Push Image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:{{ env.DOCKER_TAG }}
